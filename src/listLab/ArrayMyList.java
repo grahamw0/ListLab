@@ -1,6 +1,3 @@
-/**
- * 
- */
 package listLab;
 
 import java.util.Arrays;
@@ -27,7 +24,7 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean add(int index, Class<T> o) {
-    
+
     return false;
   }
 
@@ -38,12 +35,11 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean add(Class<T> o) {
-    if((size += 1) > array.length) {
+    if ((size += 1) > array.length) {
       this.array = Arrays.copyOf(array, (array.length * 2));
       this.array[size() + 1] = o;
       size++;
-    }
-    else {
+    } else {
       this.array[size() + 1] = o;
       size++;
     }
@@ -68,7 +64,14 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean contains(Class<T> o) {
-    // TODO Auto-generated method stub
+    for(Object i : array) {
+      if(i == null) {  // the end of the array should be all nulls, so return false on the 1st one
+        return false;
+      }
+      else if(i == o) {
+        return true;
+      }
+    }
     return false;
   }
 
