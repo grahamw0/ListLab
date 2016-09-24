@@ -1,6 +1,7 @@
 package listLab;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author grahamw0
@@ -99,8 +100,12 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public int indexOf(T o) {
-    // TODO Auto-generated method stub
-    return 0;
+    for(int i = 0; i < size; i++) {
+      if(array[i] == o) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   /*
@@ -146,8 +151,13 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean set(int index, Object element) {
-    // TODO Auto-generated method stub
-    return false;
+    if(index < 0 || index > size) {
+      throw new IndexOutOfBoundsException();  //TODO Should this be recoverable?
+    }
+    else {
+      array[index] = element;
+    }
+    return true;
   }
 
   /*
@@ -178,8 +188,7 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public T[] toArray() {
-    // TODO Auto-generated method stub
-    return null;
+    return (T[]) array;
   }
 
   /*
@@ -189,8 +198,15 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean swap(int position1, int position2) {
-    // TODO Auto-generated method stub
-    return false;
+    if(position1 < 0 || position1 > size || position2 < 0 || position2 > size) {
+      throw new IndexOutOfBoundsException();  //TODO Should this be recoverable?
+    }
+    else {
+      Object temp = array[position1];
+      array[position1] = array[position2];
+      array[position2] = temp;
+    }
+    return true;
   }
 
   /*
@@ -200,8 +216,8 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
-    // TODO Auto-generated method stub
-    return false;
+    Collections.rotate(Arrays.asList(array), positions);
+    return true;
   }
 
 }
