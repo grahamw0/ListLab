@@ -14,8 +14,7 @@ public class Driver {
    */
   public static void main(String[] args) {
     // TODO Auto-generated method stub
-    float time = 1.5f;
-    Song song = new Song("Some RadioHead Bull", "Radiohead", time);
+    Song song = new Song("Some RadioHead Bull", "Radiohead", 2.3f);
     System.out.println(song.toString());
   }
 

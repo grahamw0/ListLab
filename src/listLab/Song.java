@@ -18,7 +18,11 @@ public class Song {
 
 
   public String toString() {
+    int playTimeInSec = (int) (playTime * 60);
+    int minutes = playTimeInSec / 60;
+    int seconds = playTimeInSec % 60;
     
+    return "Song: " + name + ", Artist: " + artist + ", Playtime: " + minutes + ":" + seconds;
   }
 
   public double getPlayTime() {
