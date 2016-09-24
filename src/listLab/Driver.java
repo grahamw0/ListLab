@@ -23,6 +23,7 @@ public class Driver {
       test.add(i);
     }
     System.out.println(test.contains(17));
+    System.out.println(test.get(2));
   }
 
 }

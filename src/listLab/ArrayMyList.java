@@ -84,7 +84,12 @@ public class ArrayMyList<T> implements MyList<T> {
   @Override
   public T get(int index) {
     // TODO Auto-generated method stub
-    return null;
+    if(index < 0 || index > size) {
+      throw new IndexOutOfBoundsException();  //TODO Should this be recoverable?
+    }
+    else {
+      return (T) array[index];
+    }
   }
 
   /*
