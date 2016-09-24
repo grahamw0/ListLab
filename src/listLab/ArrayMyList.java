@@ -23,7 +23,7 @@ public class ArrayMyList<T> implements MyList<T> {
    * @see listLab.MyList#add(int, java.lang.Class)
    */
   @Override
-  public boolean add(int index, Class<T> o) {
+  public boolean add(int index, T o) {
 
     return false;
   }
@@ -34,13 +34,13 @@ public class ArrayMyList<T> implements MyList<T> {
    * @see listLab.MyList#add(java.lang.Class)
    */
   @Override
-  public boolean add(Class<T> o) {
-    if ((size += 1) > array.length) {
+  public boolean add(T o) {
+    if ((size + 1) > array.length) {
       this.array = Arrays.copyOf(array, (array.length * 2));
-      this.array[size() + 1] = o;
+      this.array[size] = o;
       size++;
     } else {
-      this.array[size() + 1] = o;
+      this.array[size] = o;
       size++;
     }
     return true;
@@ -63,7 +63,7 @@ public class ArrayMyList<T> implements MyList<T> {
    * @see listLab.MyList#contains(java.lang.Class)
    */
   @Override
-  public boolean contains(Class<T> o) {
+  public boolean contains(T o) {
     for(Object i : array) {
       if(i == null) {  // the end of the array should be all nulls, so return false on the 1st one
         return false;
@@ -92,7 +92,7 @@ public class ArrayMyList<T> implements MyList<T> {
    * @see listLab.MyList#indexOf(java.lang.Class)
    */
   @Override
-  public int indexOf(Class<T> o) {
+  public int indexOf(T o) {
     // TODO Auto-generated method stub
     return 0;
   }
