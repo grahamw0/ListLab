@@ -9,12 +9,12 @@ package listLab;
  */
 public interface MyList<T> {
   
-  public boolean add(int index, Class <T> o);
-  public boolean add(Class <T> o);
+  public boolean add(int index, T o);
+  public boolean add(T o);
   public boolean clear();
-  public boolean contains(Class <T> o);
+  public boolean contains(T o);
   public T get(int index);
-  public int indexOf(Class <T> o);
+  public int indexOf(T o);
   public boolean isEmpty();
   public T remove(int index);
   public T remove(Object o);
