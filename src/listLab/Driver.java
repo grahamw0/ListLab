@@ -18,7 +18,7 @@ public class Driver {
     Song song2 = new Song("Some RadioHead Bull", "Radiohead", 2.1f);
     System.out.println(song.equals(song2));
     
-    ArrayMyList<Integer> test = new ArrayMyList<>();
+    ArrayMyList<Integer> test = new ArrayMyList<>(Integer.class);
     for(int i = 0; i < 20; i++) {
       test.add(i);
     }

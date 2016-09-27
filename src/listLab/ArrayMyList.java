@@ -1,5 +1,6 @@
 package listLab;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -11,11 +12,13 @@ import java.util.Collections;
 public class ArrayMyList<T> implements MyList<T> {
 
   private int size;
-  private Object[] array;
+  private T[] array;
+  private final Class c;
 
-  public ArrayMyList() {
+  public ArrayMyList(Class<T> c) {
     this.size = 0;
-    this.array = new Object[10];
+    this.c = c;
+    array = (T[]) Array.newInstance(this.c, 10);
   }
 
   /*
@@ -25,8 +28,26 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean add(int index, T o) {
+    // TODO Finish
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+    }
 
-    return false;
+    if ((size + 1) > array.length) {
+      this.array = Arrays.copyOf(array, (array.length * 2));
+      for (int i = size - 1; i >= index; i--) {
+        array[i + 1] = array[i];
+      }
+      array[index] = o;
+      size++;
+    } else {
+      for (int i = size - 1; i >= index; i--) {
+        array[i + 1] = array[i];
+      }
+      array[index] = o;
+      size++;
+    }
+    return true;
   }
 
   /*
@@ -54,7 +75,7 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean clear() {
-    this.array = new Object[10];
+    this.array = (T[]) Array.newInstance(c, 10);
     return true;
   }
 
@@ -65,12 +86,11 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean contains(T o) {
-    for(Object i : array) {
+    for (Object i : array) {
       // TODO ask Prof if the double checking is worth not going through null entries
-      if(i == null) {  // the end of the array should be all nulls, so return false on the 1st one
+      if (i == null) { // the end of the array should be all nulls, so return false on the 1st one
         return false;
-      }
-      else if(i == o) {
+      } else if (i == o) {
         return true;
       }
     }
@@ -85,10 +105,9 @@ public class ArrayMyList<T> implements MyList<T> {
   @Override
   public T get(int index) {
     // TODO Auto-generated method stub
-    if(index < 0 || index > size) {
-      throw new IndexOutOfBoundsException();  //TODO Should this be recoverable?
-    }
-    else {
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+    } else {
       return (T) array[index];
     }
   }
@@ -100,8 +119,8 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public int indexOf(T o) {
-    for(int i = 0; i < size; i++) {
-      if(array[i] == o) {
+    for (int i = 0; i < size; i++) {
+      if (array[i] == o) {
         return i;
       }
     }
@@ -129,8 +148,14 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public T remove(int index) {
-    // TODO Auto-generated method stub
-    return null;
+    T returnObject = array[index];
+    for (int i = index; i < size - 1; i++) {
+      array[i] = array[i + 1];
+    }
+    array[size - 1] = null;
+    size--;
+
+    return returnObject;
   }
 
   /*
@@ -141,7 +166,11 @@ public class ArrayMyList<T> implements MyList<T> {
   @Override
   public T remove(Object o) {
     // TODO Auto-generated method stub
-    return null;
+
+    int index = indexOf((T) o);
+    remove(index);
+
+    return (T) o;
   }
 
   /*
@@ -151,11 +180,10 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean set(int index, Object element) {
-    if(index < 0 || index > size) {
-      throw new IndexOutOfBoundsException();  //TODO Should this be recoverable?
-    }
-    else {
-      array[index] = element;
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+    } else {
+      array[index] = (T) element;
     }
     return true;
   }
@@ -176,9 +204,15 @@ public class ArrayMyList<T> implements MyList<T> {
    * @see listLab.MyList#subList(int, int)
    */
   @Override
-  public MyList<T> subList(int fromindex, int toIndex) {
+  public MyList<T> subList(int fromIndex, int toIndex) {
     // TODO Auto-generated method stub
-    return null;
+    if (fromIndex < 0 || fromIndex > size || toIndex < 0 || toIndex > size) {
+      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+    }
+
+    ArrayMyList newList = new ArrayMyList<>(c);
+    newList.setArray(Arrays.copyOfRange(array, fromIndex, toIndex));
+    return newList;
   }
 
   /*
@@ -188,7 +222,7 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public T[] toArray() {
-    return (T[]) array;
+    return array;
   }
 
   /*
@@ -198,11 +232,10 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean swap(int position1, int position2) {
-    if(position1 < 0 || position1 > size || position2 < 0 || position2 > size) {
-      throw new IndexOutOfBoundsException();  //TODO Should this be recoverable?
-    }
-    else {
-      Object temp = array[position1];
+    if (position1 < 0 || position1 > size || position2 < 0 || position2 > size) {
+      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+    } else {
+      T temp = array[position1];
       array[position1] = array[position2];
       array[position2] = temp;
     }
@@ -218,6 +251,10 @@ public class ArrayMyList<T> implements MyList<T> {
   public boolean shift(int positions) {
     Collections.rotate(Arrays.asList(array), positions);
     return true;
+  }
+
+  public void setArray(T[] array) {
+    this.array = array;
   }
 
 }
