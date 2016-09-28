@@ -32,21 +32,12 @@ public class ArrayMyList<T> implements MyList<T> {
     if (index < 0 || index > size) {
       throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
     }
-
-    if ((size + 1) > array.length) {
-      this.array = Arrays.copyOf(array, (array.length * 2));
-      for (int i = size - 1; i >= index; i--) {
-        array[i + 1] = array[i];
-      }
-      array[index] = o;
-      size++;
-    } else {
-      for (int i = size - 1; i >= index; i--) {
-        array[i + 1] = array[i];
-      }
-      array[index] = o;
-      size++;
+    ensureArraySpace();
+    for (int i = size - 1; i >= index; i--) {
+      array[i + 1] = array[i];
     }
+    array[index] = o;
+    size++;
     return true;
   }
 
@@ -57,14 +48,10 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean add(T o) {
-    if ((size + 1) > array.length) {
-      this.array = Arrays.copyOf(array, (array.length * 2));
-      this.array[size] = o;
-      size++;
-    } else {
-      this.array[size] = o;
-      size++;
-    }
+    ensureArraySpace();
+    this.array[size] = o;
+    size++;
+
     return true;
   }
 
@@ -167,11 +154,8 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public T remove(Object o) {
-    // TODO Auto-generated method stub
-
     int index = indexOf((T) o);
     remove(index);
-
     return (T) o;
   }
 
@@ -257,6 +241,11 @@ public class ArrayMyList<T> implements MyList<T> {
 
   public void setArray(T[] array) {
     this.array = array;
+  }
+
+  private void ensureArraySpace() {
+    if ((size + 1) > array.length)
+      this.array = Arrays.copyOf(array, (array.length * 2));
   }
 
 }
