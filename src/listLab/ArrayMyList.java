@@ -86,15 +86,17 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean contains(T o) {
-    for (Object i : array) {
-      // TODO ask Prof if the double checking is worth not going through null entries
-      if (i == null) { // the end of the array should be all nulls, so return false on the 1st one
-        return false;
-      } else if (i == o) {
+    if (array[0] == null) {
+      return false;
+    }
+
+    for (int i = 0; i < size - 1; i++) {
+      if (array[i] == o) {
         return true;
       }
     }
     return false;
+
   }
 
   /*
