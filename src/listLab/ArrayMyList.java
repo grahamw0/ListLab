@@ -63,6 +63,7 @@ public class ArrayMyList<T> implements MyList<T> {
   @Override
   public boolean clear() {
     this.array = (T[]) Array.newInstance(c, 10);
+    this.size = 0;
     return true;
   }
 
@@ -123,11 +124,7 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean isEmpty() {
-    if (size == 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return (size == 0);
   }
 
   /*
