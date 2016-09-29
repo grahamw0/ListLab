@@ -235,9 +235,10 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
-    Collections.rotate(Arrays.asList(array), positions);
+    
     return true;
   }
+  
 
   public void setArray(T[] array) {
     this.array = array;
