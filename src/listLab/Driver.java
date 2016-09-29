@@ -32,12 +32,15 @@ public class Driver {
      */
 
     long startTime = System.currentTimeMillis();
-    for (long i = 0; i < 500000L; i++) {
+    /*for (long i = 0; i < 500L; i++) {
       //test.add(rand.nextInt(1000001), rand.nextLong());  // This test took 2780309 milliseconds
-      test.swap(rand.nextInt(1000001), rand.nextInt(1000001));  //This test took 92 milliseconds
-    }
+      //test.get(rand.nextInt(100001)); // 8 milliseconds
+      //test.swap(rand.nextInt(1000001), rand.nextInt(1000001));  //This test took 92 milliseconds
+      test.shift(rand.nextInt(200001)-100001);
+    }*/
+    test.shift(rand.nextInt(200001)-100001);
     long stopTime = System.currentTimeMillis();
-    long elapsedTime = stopTime - startTime;
+    long elapsedTime = (stopTime - startTime);
     System.out.println(elapsedTime);
   }
 
