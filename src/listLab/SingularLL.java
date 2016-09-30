@@ -88,8 +88,9 @@ public class SingularLL<T> implements MyList<T> {
       }
       newNode.setNext(currentNode.getNext());
       currentNode.setNext(newNode);
+      size++;
     }
-    size++;
+
     return true;
   }
 
@@ -170,7 +171,7 @@ public class SingularLL<T> implements MyList<T> {
   @Override
   public int indexOf(T o) {
     Node currentNode = head;
-    for (int i = 0; i < size - 1; i++) {
+    for (int i = 0; i < size; i++) {
       if (currentNode.getData() == o) {
         return i;
       }
@@ -273,14 +274,27 @@ public class SingularLL<T> implements MyList<T> {
     checkBoundsHead(index);
     Node newNode = new Node(element);
     Node currentNode = head;
-    //TODO Head and tail cases
     
-    for(int i = 0; i < size - 1; i++) {
-      currentNode = currentNode.getNext();
+    if (index == 0) { // Head case
+      newNode.setNext(head.getNext());
+      this.head = newNode;
+    } else if (index == size - 1) { // Tail case
+      for (int i = 0; i < index - 1; i++) {
+        currentNode = currentNode.getNext();
+      }
+      currentNode.setNext(newNode);
+      newNode.setNext(null);
+      this.tail = newNode;
+
+    } else {
+
+      for (int i = 0; i < index - 1; i++) {
+        currentNode = currentNode.getNext();
+      }
+      newNode.setNext(currentNode.getNext().getNext());
+      currentNode.setNext(newNode);
     }
-    newNode.setNext(currentNode.getNext().getNext());
-    size--;
-    
+
     return true;
   }
 
@@ -302,7 +316,23 @@ public class SingularLL<T> implements MyList<T> {
   @Override
   public MyList<T> subList(int fromindex, int toIndex) {
     // TODO Auto-generated method stub
-    return null;
+    checkBoundsHead(fromindex);
+    checkBoundsHead(toIndex);
+    
+    Node currentNode = head;
+    boolean inRange = false;
+    SingularLL<T> newList = new SingularLL<>();
+    for(int i = 0; i < toIndex; i++) {
+      if(i == fromindex) {
+        inRange = true;
+      }
+      if(inRange) {
+        newList.add((T) currentNode.getData());
+      }
+      currentNode = currentNode.getNext();
+    }
+    
+    return newList;
   }
 
   /*
@@ -312,12 +342,12 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public T[] toArray() {
-    if(head == null) {
+    if (head == null) {
       return null;
     }
     Node currentNode = head;
     T[] array = (T[]) Array.newInstance(head.getData().getClass(), size);
-    for(int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
       array[i] = (T) currentNode.getData();
       currentNode = currentNode.getNext();
     }
@@ -331,7 +361,7 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean swap(int position1, int position2) {
-    if(size < 2) {
+    if (size < 2) {
       return false;
     }
     checkBoundsHead(position1);
@@ -341,12 +371,11 @@ public class SingularLL<T> implements MyList<T> {
     Node node2 = null;
     Object data1 = null;
     Object temp = null;
-    
-    for(int i = 0; i <= Math.max(position1, position2); i++) {
-      if(i == position1) {
+
+    for (int i = 0; i <= Math.max(position1, position2); i++) {
+      if (i == position1) {
         node1 = currentNode;
-      }
-      else if (i == position2) {
+      } else if (i == position2) {
         node2 = currentNode;
       }
       currentNode = currentNode.getNext();
@@ -355,8 +384,8 @@ public class SingularLL<T> implements MyList<T> {
     temp = data1;
     node1.setData(node2.getData());
     node2.setData(temp);
-    
-    
+
+
     return true;
   }
 
