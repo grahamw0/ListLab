@@ -3,14 +3,16 @@
  */
 package listLab;
 
+import java.lang.reflect.Array;
+
 /**
  * @author grahamw0
  *
  */
 
 class Node {
-  Object data;
-  Node next;
+  private Object data;
+  private Node next;
 
   public Node(Object data) {
     this.data = data;
@@ -73,9 +75,7 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean add(int index, T o) {
-    if (index < 0 || index > size - 1 || head == null) {
-      throw new IndexOutOfBoundsException();
-    }
+    checkBoundsHead(index);
     Node newNode = new Node(o);
     Node currentNode = head;
     if (index == 0) {
@@ -132,12 +132,14 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean contains(T o) {
-    Node currentNode = head;
-    for (int i = 0; i < size; i++) {
-      if (currentNode.getData() == o) {
-        return true;
-      } else {
-        currentNode = currentNode.getNext();
+    if (head != null) {
+      Node currentNode = head;
+      for (int i = 0; i < size; i++) {
+        if (currentNode.getData() == o) {
+          return true;
+        } else {
+          currentNode = currentNode.getNext();
+        }
       }
     }
     return false;
@@ -150,12 +152,7 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public T get(int index) {
-    if (index < 0 || index > size - 1) {
-      throw new IndexOutOfBoundsException();
-    }
-    if (head == null) {
-      throw new NullPointerException(); // TODO Maybe custom exception???
-    }
+    checkBoundsHead(index);
 
     Node currentNode = head;
     for (int i = 0; i < index; i++) {
@@ -199,13 +196,7 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public T remove(int index) {
-    if (index < 0 || index > size - 1) {
-      throw new IndexOutOfBoundsException();
-    }
-
-    if (head == null) {
-      throw new NullPointerException(); // Maybe custom exception???
-    }
+    checkBoundsHead(index);
 
     Node currentNode = head;
     Object deletedData;
@@ -235,8 +226,41 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public T remove(Object o) {
-    // TODO Auto-generated method stub
-    return null;
+    if (head == null) {
+      throw new NullPointerException("Linked list is empty");
+    }
+
+    Node currentNode = head;
+    boolean searching = true;
+    T deletedData = null;
+
+    // If node to be removed is head
+    if (head.getData() == o) {
+      deletedData = (T) head.getData();
+      head.setData(null);
+      size--;
+    }
+
+    // If node is in middle of list
+    while (searching && currentNode.getNext() != tail) {
+      if (currentNode.getNext().getData() == o) {
+        deletedData = (T) currentNode.getNext().getData();
+        currentNode.setNext(currentNode.getNext().getNext());
+        size--;
+        searching = false;
+      } else {
+        currentNode = currentNode.getNext();
+      }
+    }
+
+    // If node to remove is tail
+    if (currentNode.getNext().getData() == o && !searching) {
+      deletedData = (T) currentNode.getNext().getData();
+      currentNode.setNext(null);
+      tail = currentNode;
+      size--;
+    }
+    return deletedData;
   }
 
   /*
@@ -246,8 +270,18 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean set(int index, Object element) {
-    // TODO Auto-generated method stub
-    return false;
+    checkBoundsHead(index);
+    Node newNode = new Node(element);
+    Node currentNode = head;
+    //TODO Head and tail cases
+    
+    for(int i = 0; i < size - 1; i++) {
+      currentNode = currentNode.getNext();
+    }
+    newNode.setNext(currentNode.getNext().getNext());
+    size--;
+    
+    return true;
   }
 
   /*
@@ -278,8 +312,16 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public T[] toArray() {
-    // TODO Auto-generated method stub
-    return null;
+    if(head == null) {
+      return null;
+    }
+    Node currentNode = head;
+    T[] array = (T[]) Array.newInstance(head.getData().getClass(), size);
+    for(int i = 0; i < size; i++) {
+      array[i] = (T) currentNode.getData();
+      currentNode = currentNode.getNext();
+    }
+    return array;
   }
 
   /*
@@ -289,8 +331,33 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean swap(int position1, int position2) {
-    // TODO Auto-generated method stub
-    return false;
+    if(size < 2) {
+      return false;
+    }
+    checkBoundsHead(position1);
+    checkBoundsHead(position2);
+    Node currentNode = head;
+    Node node1 = null;
+    Node node2 = null;
+    Object data1 = null;
+    Object temp = null;
+    
+    for(int i = 0; i <= Math.max(position1, position2); i++) {
+      if(i == position1) {
+        node1 = currentNode;
+      }
+      else if (i == position2) {
+        node2 = currentNode;
+      }
+      currentNode = currentNode.getNext();
+    }
+    data1 = node1.getData();
+    temp = data1;
+    node1.setData(node2.getData());
+    node2.setData(temp);
+    
+    
+    return true;
   }
 
   /*
@@ -304,6 +371,14 @@ public class SingularLL<T> implements MyList<T> {
     return false;
   }
 
+  private void checkBoundsHead(int index) {
+    if (index < 0 || index > size - 1) {
+      throw new IndexOutOfBoundsException();
+    }
 
+    if (head == null) {
+      throw new NullPointerException("Linked list is empty"); // Maybe custom exception???
+    }
+  }
 
 }

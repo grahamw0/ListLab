@@ -42,12 +42,14 @@ public class Driver {
     long elapsedTime = (stopTime - startTime);
     System.out.println(elapsedTime);*/
     
-    ArrayMyList<String> stringTest = new ArrayMyList<>(String.class);
+    /*ArrayMyList<String> stringTest = new ArrayMyList<>(String.class);
     stringTest.add("hello");
     stringTest.add("world");
     stringTest.add("hello");
     
-    System.out.println(stringTest.contains("hello"));
+    System.out.println(stringTest.contains("hello"));*/
+    
+    SingularLL<String> llString= new SingularLL<>();
   }
 
 }
