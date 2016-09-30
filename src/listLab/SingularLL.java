@@ -1,6 +1,3 @@
-/**
- * 
- */
 package listLab;
 
 import java.lang.reflect.Array;
@@ -9,51 +6,6 @@ import java.lang.reflect.Array;
  * @author grahamw0
  *
  */
-
-class Node {
-  private Object data;
-  private Node next;
-
-  public Node(Object data) {
-    this.data = data;
-    next = null;
-  }
-
-  public Node(Object data, Node next) {
-    this.data = data;
-    this.next = next;
-  }
-
-  /**
-   * @return the data
-   */
-  public Object getData() {
-    return data;
-  }
-
-  /**
-   * @param data the data to set
-   */
-  public void setData(Object data) {
-    this.data = data;
-  }
-
-  /**
-   * @return the next
-   */
-  public Node getNext() {
-    return next;
-  }
-
-  /**
-   * @param next the next to set
-   */
-  public void setNext(Node next) {
-    this.next = next;
-  }
-
-
-}
 
 
 public class SingularLL<T> implements MyList<T> {
@@ -274,7 +226,7 @@ public class SingularLL<T> implements MyList<T> {
     checkBoundsHead(index);
     Node newNode = new Node(element);
     Node currentNode = head;
-    
+
     if (index == 0) { // Head case
       newNode.setNext(head.getNext());
       this.head = newNode;
@@ -318,20 +270,20 @@ public class SingularLL<T> implements MyList<T> {
     // TODO Auto-generated method stub
     checkBoundsHead(fromindex);
     checkBoundsHead(toIndex);
-    
+
     Node currentNode = head;
     boolean inRange = false;
     SingularLL<T> newList = new SingularLL<>();
-    for(int i = 0; i < toIndex; i++) {
-      if(i == fromindex) {
+    for (int i = 0; i < toIndex; i++) {
+      if (i == fromindex) {
         inRange = true;
       }
-      if(inRange) {
+      if (inRange) {
         newList.add((T) currentNode.getData());
       }
       currentNode = currentNode.getNext();
     }
-    
+
     return newList;
   }
 
