@@ -8,13 +8,13 @@ import java.util.Arrays;
  * @param <T>
  *
  */
-public class ArrayMyList<T> implements MyList<T> {
+public class ListArray<T> implements MyList<T> {
 
   private int size;
   private T[] array;
   private final Class c;
 
-  public ArrayMyList(Class<T> c) {
+  public ListArray(Class<T> c) {
     this.size = 0;
     this.c = c;
     array = (T[]) Array.newInstance(this.c, 10);
@@ -192,7 +192,7 @@ public class ArrayMyList<T> implements MyList<T> {
       throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
     }
 
-    ArrayMyList newList = new ArrayMyList<>(c);
+    ListArray newList = new ListArray<>(c);
     newList.setArray(Arrays.copyOfRange(array, fromIndex, toIndex));
     return newList;
   }
