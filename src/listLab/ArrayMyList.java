@@ -231,6 +231,23 @@ public class ArrayMyList<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
+    int actualShift = Math.abs(positions) % size;
+    if (actualShift == 0) {
+      return true;
+    }
+    if (positions > 0) {
+      for(int i = 0; i < actualShift; i++) {  // Counter for shifts
+        T temp = array[size-1];
+        for(int j = size - 2; j >= 0; j--) {  // Individually shifting by one
+          array[j+1] = array[j];
+        }
+        array[0] = temp;
+      }
+    }
+    else if (positions < 0) {
+      
+    }
+    
     
     return true;
   }
