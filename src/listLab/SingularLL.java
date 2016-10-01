@@ -34,7 +34,7 @@ public class SingularLL<T> implements MyList<T> {
       newNode.setNext(head);
       this.head = newNode;
       size++;
-    } else {
+    } else { // Below check may be unnecessary
       for (int i = 0; i < index - 1 && currentNode.getNext() != null; i++) {
         currentNode = currentNode.getNext();
       }
@@ -155,7 +155,7 @@ public class SingularLL<T> implements MyList<T> {
 
     Node currentNode = head;
     Object deletedData;
-    if (index == size - 1) {
+    if (index == size - 1) { // Tail case
       for (int i = 0; i < index - 1; i++) {
         currentNode = currentNode.getNext();
       }
@@ -163,7 +163,11 @@ public class SingularLL<T> implements MyList<T> {
       tail = currentNode;
       currentNode.setNext(null);
       size--;
-    } else {
+    } else if (index == 0) {  // Head case
+      deletedData = head.getData();
+      head = head.getNext();
+      size--;
+    } else {  // In the middle
       for (int i = 0; i < index - 1; i++) {
         currentNode = currentNode.getNext();
       }
@@ -193,6 +197,7 @@ public class SingularLL<T> implements MyList<T> {
     if (head.getData() == o) {
       deletedData = (T) head.getData();
       head.setData(null);
+      head = head.getNext();
       size--;
     }
 
@@ -209,7 +214,7 @@ public class SingularLL<T> implements MyList<T> {
     }
 
     // If node to remove is tail
-    if (currentNode.getNext().getData() == o && !searching) {
+    if (currentNode.getNext().getData() == o && searching) {
       deletedData = (T) currentNode.getNext().getData();
       currentNode.setNext(null);
       tail = currentNode;
@@ -269,7 +274,6 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public MyList<T> subList(int fromindex, int toIndex) {
-    // TODO Auto-generated method stub
     checkBoundsHead(fromindex);
     checkBoundsHead(toIndex);
 
