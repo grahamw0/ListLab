@@ -122,12 +122,14 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public int indexOf(T o) {
-    Node currentNode = head;
-    for (int i = 0; i < size; i++) {
-      if (currentNode.getData() == o) {
-        return i;
+    if (head != null) {
+      Node currentNode = head;
+      for (int i = 0; i < size; i++) {
+        if (currentNode.getData() == o) {
+          return i;
+        }
+        currentNode = currentNode.getNext();
       }
-      currentNode = currentNode.getNext();
     }
     return -1;
   }
