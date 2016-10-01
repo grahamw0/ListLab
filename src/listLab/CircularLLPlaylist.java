@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class CircularLLPlaylist implements Playlist {
 
-  /* (non-Javadoc)
-   * @see listLab.Playlist#playlistName()
+  /**
+   * 
    */
   @Override
   public String playlistName() {
