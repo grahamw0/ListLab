@@ -34,12 +34,11 @@ public class Driver {
     long elapsedTime = (stopTime - startTime);
     System.out.println(elapsedTime);*/
     
-    SingularLL<Integer> ll = new SingularLL<>();
+    CircularLL<Integer> ll = new CircularLL<>();
     for(int i = 0; i < 20; i++) {
       ll.add(i);
     }
-    
-    ll.swap(19, 0);
+   ll.swap(2,14);
     
     for(Integer i: ll.toArray()) {
       System.out.println(i);
