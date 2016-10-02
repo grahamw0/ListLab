@@ -32,8 +32,11 @@ public class Driver {
       // Adds take 1hr 35min
       //list.addSongAt(new Song(n.toString(), m.toString(), rand.nextFloat()), rand.nextInt(1000001));
       
+      //Gets take 0.054 seconds
       list.getSongAt(rand.nextInt(100001));
-      //test.swap(rand.nextInt(1000001), rand.nextInt(1000001));
+      
+      // Swapping takes 0.188 seconds
+      list.swapSongs(rand.nextInt(1000001), rand.nextInt(1000001));
       //test.shift(rand.nextInt(2000001)-1000001);
     }
     long stopTime = System.currentTimeMillis();
