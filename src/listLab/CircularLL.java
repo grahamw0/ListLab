@@ -217,7 +217,7 @@ public class CircularLL<T> implements MyList<T> {
     
     // If node to be removed is head
     if (head.getData() == o) {
-      deletedData = (T) head.getData();
+      deletedData = (T) head.getData(); 
       head.setData(null);
       head = head.getNext();
       size--;
@@ -243,24 +243,27 @@ public class CircularLL<T> implements MyList<T> {
         size--;
       }
     }
-    return deletedData;
+    return deletedData; // return the deleted data
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#set(int, java.lang.Object)
+  /**
+   * The set method() will replace the element in specified position 
+   * in the list with the provided element.  It also throws an exception
+   * if the position value is less than 1 or greater than the list size.
+   * @param index
+   * @param Object element
+   * @return boolean
    */
   @Override
   public boolean set(int index, Object element) {
-    checkBoundsHead(index);
+    checkBoundsHead(index); // Check the bounds and throw an exception if needed.
     Node newNode = new Node(element);
     Node currentNode = head;
 
-    if (index == 0) { // Head case
+    if (index == 0) { // If it's the Head case
       newNode.setNext(head.getNext());
       this.head = newNode;
-    } else if (index == size - 1) { // Tail case
+    } else if (index == size - 1) { // If it's the Tail case
       for (int i = 0; i < index - 1; i++) {
         currentNode = currentNode.getNext();
       }
@@ -268,7 +271,7 @@ public class CircularLL<T> implements MyList<T> {
       newNode.setNext(null);
       this.tail = newNode;
 
-    } else {
+    } else { // If it's in the middle
 
       for (int i = 0; i < index - 1; i++) {
         currentNode = currentNode.getNext();
@@ -277,97 +280,101 @@ public class CircularLL<T> implements MyList<T> {
       currentNode.setNext(newNode);
     }
 
-    return true;
+    return true; // return true is the element is set
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#size()
+  /**
+   * The size() method will return the number of elements in the list
+   * @return the size of the list
    */
   @Override
   public int size() {
     return size;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#subList(int, int)
+  /**
+   * The subList() method will return a new list that contains the portion of 
+   * the original list between the specified fromIndex, inclusive, and toIndex, exclusive.
+   * It also throws an exception if the either the index values is less than 1 or greater
+   * than the list size.
+   * @param fromindex
+   * @param toindex
+   * @return the new list
    */
   @Override
   public MyList<T> subList(int fromindex, int toIndex) {
-    checkBoundsHead(fromindex);
-    checkBoundsHead(toIndex);
+    checkBoundsHead(fromindex); // Check the bounds and throw an exception if needed.
+    checkBoundsHead(toIndex); // Check the bounds and throw an exception if needed.
 
     Node currentNode = head;
     boolean inRange = false;
-    CircularLL<T> newList = new CircularLL<>();
-    for (int i = 0; i < toIndex; i++) {
-      if (i == fromindex) {
-        inRange = true;
+    CircularLL<T> newList = new CircularLL<>(); // Create a new CircularLL
+    for (int i = 0; i < toIndex; i++) { // get the end of the new list
+      if (i == fromindex) { // get the beginning of the list
+        inRange = true; // create the range by setting to true
       }
-      if (inRange) {
+      if (inRange) { // If i is in range add it to the new sub list
         newList.add((T) currentNode.getData());
       }
       currentNode = currentNode.getNext();
     }
-
-    return newList;
+    return newList; // return the new sublist
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#toArray()
+  /**
+   * The toArray() method will return an array containing all of the
+   * elements in the list in proper sequence. 
+   * @return the array
    */
   @Override
   public T[] toArray() {
-    if (head == null) {
+    if (head == null) { // If there is no head then return null.
       return null;
     }
     Node currentNode = head;
-    T[] array = (T[]) Array.newInstance(head.getData().getClass(), size);
+    T[] array = (T[]) Array.newInstance(head.getData().getClass(), size); // Create a new array 
     for (int i = 0; i < size; i++) {
-      array[i] = (T) currentNode.getData();
+      array[i] = (T) currentNode.getData(); // put the data into the array.
       currentNode = currentNode.getNext();
     }
-    return array;
+    return array; // Return the contents of the array.
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#swap(int, int)
+  /**
+   * The swap() method will swap elements of the List located in the
+   * positions 1 and 2.  It also throws an exception if either position values
+   * is less than 1 or greater than the list size.
+   * @param position1
+   * @param position2
+   * @return boolean
    */
   @Override
   public boolean swap(int position1, int position2) {
-    if (size < 2) {
+    if (size < 2) {  // If there are not at least 2 elements to swap
       return false;
     }
-    checkBoundsHead(position1);
-    checkBoundsHead(position2);
+    checkBoundsHead(position1); // Check the bounds and throw an exception if needed.
+    checkBoundsHead(position2); // Check the bounds and throw an exception if needed.
     Node currentNode = head;
-    Node node1 = null;
+    Node node1 = null; // create the nodes
     Node node2 = null;
     Object data1 = null;
-    Object temp = null;
+    Object temp = null; // create a temp
 
     for (int i = 0; i <= Math.max(position1, position2); i++) {
-      if (i == position1) {
+      if (i == position1) { // get positition 1
         node1 = currentNode;
-      } else if (i == position2) {
+      } else if (i == position2) { // get position 2
         node2 = currentNode;
       }
       currentNode = currentNode.getNext();
     }
-    data1 = node1.getData();
+    data1 = node1.getData(); // swap the data
     temp = data1;
     node1.setData(node2.getData());
     node2.setData(temp);
-
-
-    return true;
+    
+    return true; // return true if the swap was a success
   }
 
   /*
