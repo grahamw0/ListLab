@@ -29,14 +29,15 @@ public class Driver {
     for (int i = 0; i < 500000; i++) {
       Integer n = rand.nextInt();
       Integer m = rand.nextInt();
-      list.addSongAt(new Song(n.toString(), m.toString(), rand.nextFloat()), rand.nextInt(1000001));  // This test took 2780309 milliseconds
-      //test.get(rand.nextInt(100001)); // 8 milliseconds
-      //test.swap(rand.nextInt(1000001), rand.nextInt(1000001));  //This test took 92 milliseconds
+      // Adds take 1hr 35min
+      //list.addSongAt(new Song(n.toString(), m.toString(), rand.nextFloat()), rand.nextInt(1000001));
+      
+      list.getSongAt(rand.nextInt(100001));
+      //test.swap(rand.nextInt(1000001), rand.nextInt(1000001));
       //test.shift(rand.nextInt(2000001)-1000001);
-      //test.shift(rand.nextInt(1000001));
     }
     long stopTime = System.currentTimeMillis();
-    double elapsedTime = (stopTime - startTime) * 1000;
+    double elapsedTime = (stopTime - startTime) * 0.001;
     System.out.println(elapsedTime + " seconds");
     
     
