@@ -63,7 +63,7 @@ public class CircularLLPlaylist implements Playlist {
    * @see listLab.Playlist#getList()
    */
   @Override
-  public List getList() {
+  public List<Song> getList() {
     return (List<Song>) Arrays.asList(list.toArray());
   }
 

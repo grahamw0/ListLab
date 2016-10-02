@@ -55,7 +55,7 @@ public class ArrayPlaylist implements Playlist {
    * @see listLab.Playlist#getList()
    */
   @Override
-  public List getList() {
+  public List<Song> getList() {
     return (List<Song>) Arrays.asList(array.toArray());
   }
 
@@ -98,7 +98,7 @@ public class ArrayPlaylist implements Playlist {
   @Override
   public boolean isSongInPlaylsit(String name, String artist) {
     for(Song s : array.toArray()) {
-      if(s.getSongName().equals(name) && s.getArtist().equals(artist)) {
+      if(s.getSongName().equalsIgnoreCase(name) && s.getArtist().equalsIgnoreCase(artist)) {
         return true;
       }
     }
@@ -111,7 +111,7 @@ public class ArrayPlaylist implements Playlist {
   @Override
   public void songsByArtist(String name) {
     for(Song s : array.toArray()) {
-      if(s.getArtist().equals(name)) {
+      if(s.getArtist().equalsIgnoreCase(name)) {
         System.out.println(s.getSongName());
       }
     }
