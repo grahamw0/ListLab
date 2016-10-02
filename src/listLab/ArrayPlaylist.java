@@ -74,7 +74,7 @@ public class ArrayPlaylist implements Playlist {
    * @return The song object at the specified index location.
    */
   @Override
-  public Song getSongAt(Song s, int index) {
+  public Song getSongAt(int index) {
     return array.get(index);
   }
 
@@ -84,7 +84,7 @@ public class ArrayPlaylist implements Playlist {
    * @return The list of songs in the ListArray called array. 
    */
   @Override
-  public List getList() {
+  public List<Song> getList() {
     return (List<Song>) Arrays.asList(array.toArray());
   }
 
@@ -137,6 +137,7 @@ public class ArrayPlaylist implements Playlist {
     for(Song s : array.toArray()) { // Iterate the entire list
       if(s.getSongName().equals(name) && s.getArtist().equals(artist)) { // If there is a match 
         return true; // return true if found
+
       }
     }
     return false;

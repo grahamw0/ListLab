@@ -13,7 +13,7 @@ public interface Playlist {
   public String playlistName();
   public boolean addSong(Song s);
   public boolean addSongAt(Song s, int index);
-  public Song getSongAt(Song s, int index);
+  public Song getSongAt(int index);
   public List getList();
   public boolean removeSong(Song s);
   public int totalSongs();
