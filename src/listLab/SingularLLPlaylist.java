@@ -135,7 +135,7 @@ public class SingularLLPlaylist implements Playlist {
    * @return boolean
    */
   @Override
-  public boolean isSongInPlaylsit(String name, String artist) {
+  public boolean isSongInPlaylist(String name, String artist) {
     for(Song s : sing.toArray()) { // Iterate the entire list.
       if(s.getSongName().equals(name) && s.getArtist().equals(artist)) { // If there is a match
     	return true; // return true if found

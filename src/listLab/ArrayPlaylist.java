@@ -13,6 +13,7 @@ import java.util.List;
  * and call on the methods that handle the array-based list. 
  * This class ArrayPlaylist will house the methods that 
  * pertain to the actual array-based playlist itself. 
+ * 
  * @author Will Graham, Ryan Godfrey
  *
  */
@@ -37,6 +38,7 @@ public class ArrayPlaylist implements Playlist {
    * the name of the playlist that is 
    * set when a new instance of the ArrayPlaylist 
    * class is created.
+   * @return name The name of the playlist
    */
   @Override
   public String playlistName() {
@@ -114,7 +116,7 @@ public class ArrayPlaylist implements Playlist {
    * The playListTime() method will iterate
    * through the entire ListArray called array
    * and total up the entire list's playtime.  
-   * @return totaltime: The total playtime of the list called array.
+   * @return totaltime: The total playtime of the list.
    */
   @Override
   public float playListTime() {
@@ -126,14 +128,15 @@ public class ArrayPlaylist implements Playlist {
   }
 
   /**
-   * Has to manually check through, because play time was not specified,
+   * The isSongInPlaylist() method 
+   * has to manually check through, because play time was not specified,
    * so no new Song created will ever match one in the playlist already.
    * @param name The name of the song
    * @param artist The name of the artist
    * @return boolean
    */
   @Override
-  public boolean isSongInPlaylsit(String name, String artist) {
+  public boolean isSongInPlaylist(String name, String artist) {
     for(Song s : array.toArray()) { // Iterate the entire list
       if(s.getSongName().equals(name) && s.getArtist().equals(artist)) { // If there is a match 
         return true; // return true if found
@@ -146,7 +149,7 @@ public class ArrayPlaylist implements Playlist {
   /**
    * The songsByArtist() method will search the entire 
    * ListArray called array and show all songs that were
-   * written by the specifed artist.
+   * written by the specified artist.
    * @param name The name of the artist
    */
   @Override
