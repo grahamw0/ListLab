@@ -2,6 +2,7 @@ package listLab;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author grahamw0
@@ -194,17 +195,20 @@ public class ListArray<T> implements MyList<T> {
 
     ListArray newList = new ListArray<>(c);
     newList.setArray(Arrays.copyOfRange(array, fromIndex, toIndex));
+    newList.size = toIndex - fromIndex;
     return newList;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#toArray()
+  /**
+   * Returns a fixed size array with all nulls trimmed off the end.
    */
   @Override
   public T[] toArray() {
-    return array;
+    T[] newArray = (T[]) Array.newInstance(this.c, size);
+    for(int i = 0; i < size; i++) {
+      newArray[i] = array[i];
+    }
+    return newArray;
   }
 
   /*
