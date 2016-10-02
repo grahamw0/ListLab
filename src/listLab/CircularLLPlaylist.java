@@ -54,7 +54,7 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public Song getSongAt(int index) {
-   return list.get(index);
+    return list.get(index);
   }
 
   /*
@@ -74,7 +74,7 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public boolean removeSong(Song s) {
-    // TODO Auto-generated method stub
+    list.remove(s);
     return true;
   }
 
@@ -85,8 +85,7 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public int totalSongs() {
-    // TODO Auto-generated method stub
-    return 0;
+    return list.size();
   }
 
   /*
@@ -96,8 +95,11 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public float playListTime() {
-    // TODO Auto-generated method stub
-    return 0;
+    float totalTime = 0;
+    for (Song s : list.toArray()) {
+      totalTime += s.getPlayTime();
+    }
+    return totalTime;
   }
 
   /*
@@ -107,7 +109,11 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public boolean isSongInPlaylsit(String name, String artist) {
-    // TODO Auto-generated method stub
+    for (Song s : list.toArray()) {
+      if (s.getSongName().equals(name) && s.getArtist().equals(artist)) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -118,7 +124,11 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public void songsByArtist(String name) {
-    // TODO Auto-generated method stub
+    for (Song s : list.toArray()) {
+      if (s.getArtist().equals(name)) {
+        System.out.println(s.getSongName());
+      }
+    }
 
   }
 
@@ -129,8 +139,10 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public boolean addSongsFrom(Playlist p) {
-    // TODO Auto-generated method stub
-    return false;
+    for (Song s : (List<Song>) p.getList()) {
+      list.add(s);
+    }
+    return true;
   }
 
   /*
@@ -140,8 +152,13 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public boolean moveSong(Song song, int position) {
-    // TODO Auto-generated method stub
-    return false;
+    if (!list.contains(song)) {
+      throw new IllegalArgumentException("String to move doesn't exist in playlist");
+    }
+    list.remove(song);
+    list.add(position, song);
+
+    return true;
   }
 
   /*
@@ -162,8 +179,8 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public boolean swapSongs(int position1, int position2) {
-    // TODO Auto-generated method stub
-    return false;
+    list.swap(position1, position2);
+    return true;
   }
 
 }
