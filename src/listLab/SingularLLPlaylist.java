@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Class SingularLLPlaylist is the playlist class
- * that implements Playlist.java as an interface.  It is 
+ * Class SingularLLPlaylist is one of the 3 playlist classes
+ * that implement Playlist.java as an interface.  It is 
  * the playlist class that is designed to create an instance of 
- * class SingularLL and call on the methods that handle the LL. 
+ * class SingularLL and call on the methods that handle the Linked List. 
  * This class SingularLLPlaylist will house the methods that 
  * pertain to the playlist itself. 
  * @author Will Graham, Ryan Godfrey
@@ -46,6 +46,7 @@ public class SingularLLPlaylist implements Playlist {
   /**
    * The addSong(Song s) method will add
    * a song to the SingularLL called sing.
+   * @param Song s The song object
    * @return boolean 
    */
   @Override
