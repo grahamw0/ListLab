@@ -47,7 +47,7 @@ public class ArrayPlaylist implements Playlist {
    * @see listLab.Playlist#getSongAt(listLab.Song, int)
    */
   @Override
-  public Song getSongAt(Song s, int index) {
+  public Song getSongAt(int index) {
     return array.get(index);
   }
 
