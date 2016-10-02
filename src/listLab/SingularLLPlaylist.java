@@ -73,7 +73,7 @@ public class SingularLLPlaylist implements Playlist {
    * @return The song object at the specified index location.
    */
   @Override
-  public Song getSongAt(Song s, int index) {
+  public Song getSongAt(int index) {
     return sing.get(index);
   }
 

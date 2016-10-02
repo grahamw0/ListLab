@@ -3,6 +3,7 @@
  */
 package listLab;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,62 +11,76 @@ import java.util.List;
  *
  */
 public class CircularLLPlaylist implements Playlist {
+  private String name;
+  private CircularLL<Song> list;
+
+  public CircularLLPlaylist(String name) {
+    this.name = name;
+    this.list = new CircularLL<>();
+  }
 
   /**
    * 
    */
   @Override
   public String playlistName() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.name;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#addSong(listLab.Song)
    */
   @Override
   public boolean addSong(Song s) {
-    // TODO Auto-generated method stub
-    return false;
+    return list.add(s);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#addSongAt(listLab.Song, int)
    */
   @Override
   public boolean addSongAt(Song s, int index) {
-    // TODO Auto-generated method stub
-    return false;
+    return list.add(index, s);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#getSongAt(listLab.Song, int)
    */
   @Override
-  public Song getSongAt(Song s, int index) {
-    // TODO Auto-generated method stub
-    return null;
+  public Song getSongAt(int index) {
+   return list.get(index);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#getList()
    */
   @Override
   public List getList() {
-    // TODO Auto-generated method stub
-    return null;
+    return (List<Song>) Arrays.asList(list.toArray());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#removeSong(listLab.Song)
    */
   @Override
   public boolean removeSong(Song s) {
     // TODO Auto-generated method stub
-    return false;
+    return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#totalSongs()
    */
   @Override
@@ -74,7 +89,9 @@ public class CircularLLPlaylist implements Playlist {
     return 0;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#playListTime()
    */
   @Override
@@ -83,7 +100,9 @@ public class CircularLLPlaylist implements Playlist {
     return 0;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#isSongInPlaylsit(java.lang.String, java.lang.String)
    */
   @Override
@@ -92,7 +111,9 @@ public class CircularLLPlaylist implements Playlist {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#songsByArtist(java.lang.String)
    */
   @Override
@@ -101,7 +122,9 @@ public class CircularLLPlaylist implements Playlist {
 
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#addSongsFrom(listLab.Playlist)
    */
   @Override
@@ -110,7 +133,9 @@ public class CircularLLPlaylist implements Playlist {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#moveSong(listLab.Song, int)
    */
   @Override
@@ -119,7 +144,9 @@ public class CircularLLPlaylist implements Playlist {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#moveAllSongs(int)
    */
   @Override
@@ -128,7 +155,9 @@ public class CircularLLPlaylist implements Playlist {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see listLab.Playlist#swapSongs(int, int)
    */
   @Override
