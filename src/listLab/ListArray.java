@@ -235,6 +235,7 @@ public class ListArray<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
+    positions *= -1;
     T[] newArray = (T[]) new Object[size];
     if (positions > 0) {
       int j = 0;
