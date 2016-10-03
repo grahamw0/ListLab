@@ -55,7 +55,6 @@ public class CircularLL<T> implements MyList<T> {
       currentNode.setNext(newNode);
       size++;
     }
-
     return true;
   }
 
