@@ -18,7 +18,7 @@ public class Driver {
   public static void main(String[] args) {
    Random rand = new Random(666);
 
-   ArrayPlaylist list = new ArrayPlaylist("Testing List");
+   ArrayPlaylist list = new ArrayPlaylist("Test List");
    for(int i = 0; i < 1000000; i++) {
      Integer n = rand.nextInt();
      Integer m = rand.nextInt();
