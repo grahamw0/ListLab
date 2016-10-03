@@ -16,7 +16,7 @@ public class Driver {
    * @param args
    */
   public static void main(String[] args) {
-   Random rand = new Random(666);
+   /*Random rand = new Random(666);
 
    ArrayPlaylist list = new ArrayPlaylist("Test List");
    for(int i = 0; i < 1000000; i++) {
@@ -41,8 +41,16 @@ public class Driver {
     }
     long stopTime = System.currentTimeMillis();
     double elapsedTime = (stopTime - startTime) * 0.001;
-    System.out.println(elapsedTime + " seconds");
+    System.out.println(elapsedTime + " seconds");*/
     
+    ListArray<Integer> test = new ListArray<>(Integer.class);
+    for(int i = 0; i < 20; i++) {
+      test.add(i);
+    }
+    test.shift(2);
+    for(Integer i : test.toArray()) {
+      System.out.println(i);
+    }
     
   }
 

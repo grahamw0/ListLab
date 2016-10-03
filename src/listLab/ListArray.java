@@ -205,7 +205,7 @@ public class ListArray<T> implements MyList<T> {
   @Override
   public T[] toArray() {
     T[] newArray = (T[]) Array.newInstance(this.c, size);
-    for(int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
       newArray[i] = array[i];
     }
     return newArray;
@@ -235,27 +235,36 @@ public class ListArray<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
-    int actualShift = Math.abs(positions) % size;
-    if (actualShift == 0) {
-      return true;
-    }
+    T[] newArray = (T[]) new Object[size];
     if (positions > 0) {
-      for(int i = 0; i < actualShift; i++) {  // Counter for shifts
-        T temp = array[size-1];
-        for(int j = size - 2; j >= 0; j--) {  // Individually shifting by one
-          array[j+1] = array[j];
-        }
-        array[0] = temp;
+      int j = 0;
+      for (int i = positions; i < size ; i++) {
+        newArray[j] = array[i];
+        j++;
+      }
+      for (int i = 0; i < positions ; i++) {
+        newArray[j] = array[i];
+        j++;
       }
     }
     else if (positions < 0) {
-      
+      int j = 0;
+      for (int i = size + positions - 1; i < size -1; i++) {
+        newArray[j] = array[i];
+        j++;
+      }
+      for (int i = 0; i < size + positions; i++) {
+        newArray[j] = array[i];
+        j++;
+      }
     }
-    
-    
+    else {
+      return true;
+    }
+    this.array = newArray;
     return true;
   }
-  
+
 
   public void setArray(T[] array) {
     this.array = array;
