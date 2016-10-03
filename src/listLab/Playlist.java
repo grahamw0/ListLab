@@ -18,7 +18,7 @@ public interface Playlist {
   public boolean removeSong(Song s);
   public int totalSongs();
   public float playListTime();
-  public boolean isSongInPlaylsit(String name, String artist);
+  public boolean isSongInPlaylist(String name, String artist);
   public void songsByArtist(String name);
   public boolean addSongsFrom(Playlist p);
   public boolean moveSong(Song song, int position);
