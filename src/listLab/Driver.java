@@ -47,7 +47,7 @@ public class Driver {
     for(int i = 0; i < 20; i++) {
       test.add(i);
     }
-    test.shift(2);
+    test.shift(-2);
     for(Integer i : test.toArray()) {
       System.out.println(i);
     }

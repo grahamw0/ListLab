@@ -249,7 +249,7 @@ public class ListArray<T> implements MyList<T> {
     }
     else if (positions < 0) {
       int j = 0;
-      for (int i = size + positions - 1; i < size -1; i++) {
+      for (int i = size + positions ; i < size; i++) {
         newArray[j] = array[i];
         j++;
       }
