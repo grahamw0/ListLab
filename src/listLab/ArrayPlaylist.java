@@ -198,8 +198,7 @@ public class ArrayPlaylist implements Playlist {
    */
   @Override
   public boolean moveAllSongs(int positions) {
-    // TODO Auto-generated method stub
-    return false;
+    return array.shift(positions);
   }
 
   /**
