@@ -156,7 +156,7 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean isEmpty() {
-    return (size == 0);
+    return (size == 0); // If size is equal to 0 then return true.
   }
 
   /**
