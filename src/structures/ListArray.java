@@ -2,7 +2,6 @@ package structures;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Class ListArray<T> will create an array-based list and is
@@ -17,6 +16,7 @@ public class ListArray<T> implements MyList<T> {
 
   private int size; // The current size
   private T[] array; // The array		
+  @SuppressWarnings("rawtypes")
   private final Class c; // A class object
 
   /**
@@ -27,6 +27,7 @@ public class ListArray<T> implements MyList<T> {
    * of 10.  
    * @param c
    */
+  @SuppressWarnings("unchecked")
   public ListArray(Class<T> c) {
     this.size = 0;
     this.c = c;
@@ -43,9 +44,8 @@ public class ListArray<T> implements MyList<T> {
    */
   @Override
   public boolean add(int index, T o) {
-    // TODO Finish
     if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+      throw new IndexOutOfBoundsException("Index is invalid");
     }
     ensureArraySpace();
     for (int i = size - 1; i >= index; i--) { // Iterate through the list starting at the end.
@@ -76,6 +76,7 @@ public class ListArray<T> implements MyList<T> {
    * The clear() method will remove all of the elements from the list.
    * @return boolean
    */
+  @SuppressWarnings("unchecked")
   @Override
   public boolean clear() {
 	// Create a new instance of an array and set it to the current array. This will clear the current.  
@@ -114,9 +115,8 @@ public class ListArray<T> implements MyList<T> {
    */
   @Override
   public T get(int index) {
-    // TODO Auto-generated method stub
     if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+      throw new IndexOutOfBoundsException("Index is invalid");
     } else {
       return (T) array[index]; // If there is no exception return the element at the specified index.
     }
@@ -172,6 +172,7 @@ public class ListArray<T> implements MyList<T> {
    * @param object
    * @return The deleted data
    */
+  @SuppressWarnings("unchecked")
   @Override
   public T remove(Object o) {
     int index = indexOf((T) o); // Get the element and its index.
@@ -187,10 +188,11 @@ public class ListArray<T> implements MyList<T> {
    * @param Object element
    * @return boolean
    */
+  @SuppressWarnings("unchecked")
   @Override
   public boolean set(int index, Object element) {
     if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+      throw new IndexOutOfBoundsException("Index is invalid");
     } else {
       array[index] = (T) element;  // Set the element at the specified index. 
     }
@@ -215,11 +217,11 @@ public class ListArray<T> implements MyList<T> {
    * @param toindex
    * @return the new list
    */
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @Override
   public MyList<T> subList(int fromIndex, int toIndex) {
-    // TODO Auto-generated method stub
     if (fromIndex < 0 || fromIndex > size || toIndex < 0 || toIndex > size) {
-      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+      throw new IndexOutOfBoundsException("Index is invalid");
     }
 
     ListArray newList = new ListArray<>(c); // Create a new array to copy to.
@@ -233,6 +235,7 @@ public class ListArray<T> implements MyList<T> {
    * elements in the list in proper sequence. 
    * @return the array
    */
+  @SuppressWarnings("unchecked")
   @Override
   public T[] toArray() {
     T[] newArray = (T[]) Array.newInstance(this.c, size); // Create a new array to copy to. 
@@ -253,7 +256,7 @@ public class ListArray<T> implements MyList<T> {
   @Override
   public boolean swap(int position1, int position2) {
     if (position1 < 0 || position1 > size || position2 < 0 || position2 > size) {
-      throw new IndexOutOfBoundsException(); // TODO Should this be recoverable?
+      throw new IndexOutOfBoundsException("Index is invalid");
     } else {
       T temp = array[position1]; // Load position1 data into a temporary
       array[position1] = array[position2]; // Load position2 data into postition1
@@ -270,6 +273,7 @@ public class ListArray<T> implements MyList<T> {
    * @param positions
    * @return boolean
    */
+  @SuppressWarnings("unchecked")
   @Override
   public boolean shift(int positions) {
     positions *= -1;

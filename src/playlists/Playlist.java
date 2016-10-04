@@ -1,6 +1,3 @@
-/**
- * 
- */
 package playlists;
 
 import java.util.List;

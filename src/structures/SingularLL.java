@@ -120,6 +120,7 @@ public class SingularLL<T> implements MyList<T> {
    * @param index The index in question
    * @return T Retrieve the element at the index
    */
+  @SuppressWarnings("unchecked")
   @Override
   public T get(int index) {
     checkBoundsHead(index); // Check bounds of the index and throw an exception if needed
@@ -171,6 +172,7 @@ public class SingularLL<T> implements MyList<T> {
    * @param index
    * @return the deleted data
    */
+  @SuppressWarnings("unchecked")
   @Override
   public T remove(int index) {
     checkBoundsHead(index);
@@ -208,6 +210,7 @@ public class SingularLL<T> implements MyList<T> {
    * @param object
    * @return The deleted data
    */
+  @SuppressWarnings("unchecked")
   @Override
   public T remove(Object o) {
     if (head == null) { // If the list is empty throw an exception.
@@ -305,6 +308,7 @@ public class SingularLL<T> implements MyList<T> {
    * @param toindex
    * @return the new list
    */
+  @SuppressWarnings("unchecked")
   @Override
   public MyList<T> subList(int fromindex, int toIndex) {
     checkBoundsHead(fromindex); // Check the bounds and throw an exception if needed.
@@ -332,6 +336,7 @@ public class SingularLL<T> implements MyList<T> {
    * 
    * @return the array
    */
+  @SuppressWarnings("unchecked")
   @Override
   public T[] toArray() {
     if (head == null) { // If there is no head then return null.
@@ -417,11 +422,11 @@ public class SingularLL<T> implements MyList<T> {
 
   private void checkBoundsHead(int index) {
     if (index < 0 || index > size - 1) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException("Index is invalid");
     }
 
     if (head == null) {
-      throw new NullPointerException("Linked list is empty"); // Maybe custom exception???
+      throw new NullPointerException("Linked list is empty");
     }
   }
 

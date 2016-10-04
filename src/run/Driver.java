@@ -1,6 +1,3 @@
-/**
- * 
- */
 package run;
 
 import java.util.List;

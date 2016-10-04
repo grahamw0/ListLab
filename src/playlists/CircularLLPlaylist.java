@@ -1,6 +1,3 @@
-/**
- * 
- */
 package playlists;
 
 import java.util.Arrays;
@@ -168,6 +165,7 @@ public class CircularLLPlaylist implements Playlist {
    * @param Playlist p A specified playlist object.
    * @return boolean
    */
+  @SuppressWarnings("unchecked")
   @Override
   public boolean addSongsFrom(Playlist p) {
     for (Song s : (List<Song>) p.getList()) { // get the list
