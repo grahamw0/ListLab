@@ -1,12 +1,12 @@
-package listLab;
+package structures;
 
 import java.lang.reflect.Array;
 
 /**
- * Class SingularLL will create a Linked List and is
- * one of the 3 generic list classes that implement MyList. 
- * This class is responsible for creating the Linked List
- * that class SingularLLPlaylist will utilize.    
+ * Class SingularLL will create a Linked List and is one of the 3 generic list classes that
+ * implement MyList. This class is responsible for creating the Linked List that class
+ * SingularLLPlaylist will utilize.
+ * 
  * @author Will Graham, Ryan Godfrey
  * @version 10/2/2016
  */
@@ -18,10 +18,9 @@ public class SingularLL<T> implements MyList<T> {
   private Node tail; // The end of the list
 
   /**
-  * Constructor for class SingularLL.  When creating
-  * an instance of this class it will set the head and
-  * tail to null, and set the size to 0.  
-  */
+   * Constructor for class SingularLL. When creating an instance of this class it will set the head
+   * and tail to null, and set the size to 0.
+   */
   public SingularLL() {
     size = 0;
     head = null;
@@ -29,16 +28,16 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The add method inserts an element into a specified position
-   * in the list.  It throws an exception if the position value
-   * is less than 1 or greater than list size.
+   * The add method inserts an element into a specified position in the list. It throws an exception
+   * if the position value is less than 1 or greater than list size.
+   * 
    * @param index
-   * @param object. 
+   * @param object.
    * @return boolean
    */
   @Override
   public boolean add(int index, T o) {
-    checkBoundsHead(index); // checks the bounds and checks if the list is null. 
+    checkBoundsHead(index); // checks the bounds and checks if the list is null.
     Node newNode = new Node(o);
     Node currentNode = head;
     if (index == 0) { // The head case
@@ -49,7 +48,8 @@ public class SingularLL<T> implements MyList<T> {
       for (int i = 0; i < index - 1 && currentNode.getNext() != null; i++) {
         currentNode = currentNode.getNext();
       }
-      newNode.setNext(currentNode.getNext()); // set the new node's next from the former tail's next.
+      newNode.setNext(currentNode.getNext()); // set the new node's next from the former tail's
+                                              // next.
       currentNode.setNext(newNode);
       size++;
     }
@@ -57,11 +57,11 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The overloaded add() method is different by taking
-   * in only a list object as a parameter.  It appends an 
-   * element to the end of the list. 
+   * The overloaded add() method is different by taking in only a list object as a parameter. It
+   * appends an element to the end of the list.
+   * 
    * @param object
-   * @return boolean  
+   * @return boolean
    */
   @Override
   public boolean add(T o) {
@@ -79,6 +79,7 @@ public class SingularLL<T> implements MyList<T> {
 
   /**
    * The clear() method will remove all of the elements from the list.
+   * 
    * @return boolean
    */
   @Override
@@ -90,8 +91,8 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The contains() method will return true if the list contains
-   * the specified element.  
+   * The contains() method will return true if the list contains the specified element.
+   * 
    * @param object
    * @return boolean
    */
@@ -100,8 +101,9 @@ public class SingularLL<T> implements MyList<T> {
     if (head != null) { // If the list is not empty
       Node currentNode = head;
       for (int i = 0; i < size; i++) {
-        if (currentNode.getData() == o) {  // If an element in the list matches the element in question
-          return true;  // If an element in the list matches the element in question
+        if (currentNode.getData() == o) { // If an element in the list matches the element in
+                                          // question
+          return true; // If an element in the list matches the element in question
         } else {
           currentNode = currentNode.getNext();
         }
@@ -111,10 +113,10 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The get() method takes in an index and returns the element located
-   * in the specified position of this list.  This method also throws an
-   * exception if the position value is less than 1 or greater than the
-   * list size.  
+   * The get() method takes in an index and returns the element located in the specified position of
+   * this list. This method also throws an exception if the position value is less than 1 or greater
+   * than the list size.
+   * 
    * @param index The index in question
    * @return T Retrieve the element at the index
    */
@@ -131,8 +133,9 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The indexOf() method will return an index in the list of the first occurrence
-   * of the specified element, or -1 if this list does not contain the element.
+   * The indexOf() method will return an index in the list of the first occurrence of the specified
+   * element, or -1 if this list does not contain the element.
+   * 
    * @param object
    * @return The index or -1 if it does not exist
    */
@@ -141,7 +144,8 @@ public class SingularLL<T> implements MyList<T> {
     if (head != null) { // If the list is not empty
       Node currentNode = head;
       for (int i = 0; i < size; i++) {
-        if (currentNode.getData() == o) { // If there is an element that matches the element in question
+        if (currentNode.getData() == o) { // If there is an element that matches the element in
+                                          // question
           return i; // return the index
         }
         currentNode = currentNode.getNext();
@@ -152,6 +156,7 @@ public class SingularLL<T> implements MyList<T> {
 
   /**
    * The isEmpty() method will return true if the list contains no elements.
+   * 
    * @return boolean True if list is empty
    */
   @Override
@@ -160,10 +165,10 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The remove() method will remove the element at the specified position
-   * in this list.  It also throws and exception if the position value is less
-   * than 1 or greater than the list size.
-   * @param index 
+   * The remove() method will remove the element at the specified position in this list. It also
+   * throws and exception if the position value is less than 1 or greater than the list size.
+   * 
+   * @param index
    * @return the deleted data
    */
   @Override
@@ -180,25 +185,26 @@ public class SingularLL<T> implements MyList<T> {
       tail = currentNode;
       currentNode.setNext(null);
       size--;
-    } else if (index == 0) {  // If it's the head
+    } else if (index == 0) { // If it's the head
       deletedData = head.getData();
       head = head.getNext();
       size--;
-    } else {  // If it's in the middle
+    } else { // If it's in the middle
       for (int i = 0; i < index - 1; i++) {
         currentNode = currentNode.getNext();
       }
       deletedData = currentNode.getNext().getData(); // get the data
-      currentNode.setNext(currentNode.getNext().getNext()); // Point the current node's next to the right location.
+      currentNode.setNext(currentNode.getNext().getNext()); // Point the current node's next to the
+                                                            // right location.
       size--;
     }
     return (T) deletedData; // return the deleted data
   }
 
   /**
-   * The overloaded remove() method is different in that it
-   * takes in an object as a parameter instead of an index. It removes
-   * the first occurrence of the specified element from the list.
+   * The overloaded remove() method is different in that it takes in an object as a parameter
+   * instead of an index. It removes the first occurrence of the specified element from the list.
+   * 
    * @param object
    * @return The deleted data
    */
@@ -243,9 +249,10 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The set method() will replace the element in specified position 
-   * in the list with the provided element.  It also throws an exception
-   * if the position value is less than 1 or greater than the list size.
+   * The set method() will replace the element in specified position in the list with the provided
+   * element. It also throws an exception if the position value is less than 1 or greater than the
+   * list size.
+   * 
    * @param index
    * @param Object element
    * @return boolean
@@ -281,6 +288,7 @@ public class SingularLL<T> implements MyList<T> {
 
   /**
    * The size() method will return the number of elements in the list
+   * 
    * @return the size of the list
    */
   @Override
@@ -289,10 +297,10 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The subList() method will return a new list that contains the portion of 
-   * the original list between the specified fromIndex, inclusive, and toIndex, exclusive.
-   * It also throws an exception if the either the index values is less than 1 or greater
-   * than the list size.
+   * The subList() method will return a new list that contains the portion of the original list
+   * between the specified fromIndex, inclusive, and toIndex, exclusive. It also throws an exception
+   * if the either the index values is less than 1 or greater than the list size.
+   * 
    * @param fromindex
    * @param toindex
    * @return the new list
@@ -319,17 +327,18 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The toArray() method will return an array containing all of the
-   * elements in the list in proper sequence. 
+   * The toArray() method will return an array containing all of the elements in the list in proper
+   * sequence.
+   * 
    * @return the array
    */
   @Override
   public T[] toArray() {
-    if (head == null) {  // If there is no head then return null.
+    if (head == null) { // If there is no head then return null.
       return null;
     }
     Node currentNode = head;
-    T[] array = (T[]) Array.newInstance(head.getData().getClass(), size); // Create a new array 
+    T[] array = (T[]) Array.newInstance(head.getData().getClass(), size); // Create a new array
     for (int i = 0; i < size; i++) {
       array[i] = (T) currentNode.getData(); // put the data into the array.
       currentNode = currentNode.getNext();
@@ -338,20 +347,20 @@ public class SingularLL<T> implements MyList<T> {
   }
 
   /**
-   * The swap() method will swap elements of the List located in the
-   * positions 1 and 2.  It also throws an exception if either position values
-   * is less than 1 or greater than the list size.
+   * The swap() method will swap elements of the List located in the positions 1 and 2. It also
+   * throws an exception if either position values is less than 1 or greater than the list size.
+   * 
    * @param position1
    * @param position2
    * @return boolean
    */
   @Override
   public boolean swap(int position1, int position2) {
-    if (size < 2) {  // If there are not at least 2 elements to swap
+    if (size < 2) { // If there are not at least 2 elements to swap
       return false;
     }
-    checkBoundsHead(position1);  // Check the bounds and throw an exception if needed.
-    checkBoundsHead(position2);  // Check the bounds and throw an exception if needed.
+    checkBoundsHead(position1); // Check the bounds and throw an exception if needed.
+    checkBoundsHead(position2); // Check the bounds and throw an exception if needed.
     Node currentNode = head;
     Node node1 = null; // create the nodes
     Node node2 = null;
@@ -361,7 +370,7 @@ public class SingularLL<T> implements MyList<T> {
     for (int i = 0; i <= Math.max(position1, position2); i++) {
       if (i == position1) { // get positition 1
         node1 = currentNode;
-      } else if (i == position2) {  // get position 2
+      } else if (i == position2) { // get position 2
         node2 = currentNode;
       }
       currentNode = currentNode.getNext();
@@ -382,8 +391,28 @@ public class SingularLL<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
-    // TODO Auto-generated method stub
-    return false;
+    if (size == 0) {
+      return false;
+    }
+    if (positions > 0) {
+      for (int i = 0; i < size - positions; i++) {
+        Node temp = head;
+        head = head.getNext();
+        temp.setNext(null);
+        tail.setNext(temp);
+        tail = temp;
+      }
+    } else if (positions < 0) {
+      for (int i = 0; i < Math.abs(positions); i++) {
+        Node temp = head;
+        head = head.getNext();
+        temp.setNext(null);
+        tail.setNext(temp);
+        tail = temp;
+      }
+    }
+
+    return true;
   }
 
   private void checkBoundsHead(int index) {

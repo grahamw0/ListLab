@@ -1,7 +1,7 @@
 /**
  * 
  */
-package listLab;
+package structures;
 
 import java.lang.reflect.Array;
 
@@ -383,8 +383,21 @@ public class CircularLL<T> implements MyList<T> {
    */
   @Override
   public boolean shift(int positions) {
-    // TODO Auto-generated method stub
-    return false;
+    if(size == 0) {
+      return false;
+    }
+    if(positions > 0) {
+      for(int i = 0; i < size - positions; i++) {
+        head = head.getNext();
+        tail = tail.getNext();
+      }
+    } else if (positions < 0) {
+      for(int i = 0; i < Math.abs(positions); i++) {
+        head = head.getNext();
+        tail = tail.getNext();
+      }
+    }
+    return true;
   }
 
   private void checkBoundsHead(int index) {
