@@ -1,7 +1,7 @@
 /**
  * 
  */
-package listLab;
+package structures;
 
 /**
  * @author Ryan Godfrey, Will Graham

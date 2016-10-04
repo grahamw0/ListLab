@@ -1,7 +1,7 @@
 /**
  * 
  */
-package listLab;
+package playlists;
 
 import java.util.List;
 

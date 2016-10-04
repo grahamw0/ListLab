@@ -1,4 +1,4 @@
-package listLab;
+package playlists;
 
 /**
  * Class Song will create a song Object.

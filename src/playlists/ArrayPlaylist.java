@@ -1,10 +1,12 @@
 /**
  * 
  */
-package listLab;
+package playlists;
 
 import java.util.Arrays;
 import java.util.List;
+
+import structures.ListArray;
 
 /**
  * Class ArrayPlaylist is one of the 3 playlist classes

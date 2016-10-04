@@ -1,10 +1,12 @@
 /**
  * 
  */
-package listLab;
+package playlists;
 
 import java.util.Arrays;
 import java.util.List;
+
+import structures.SingularLL;
 
 /**
  * Class SingularLLPlaylist is one of the 3 playlist classes
@@ -196,8 +198,7 @@ public class SingularLLPlaylist implements Playlist {
    */
   @Override
   public boolean moveAllSongs(int positions) {
-    // TODO Auto-generated method stub
-    return false;
+    return sing.shift(positions);
   }
 
   /**

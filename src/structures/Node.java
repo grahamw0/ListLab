@@ -1,5 +1,5 @@
 
-package listLab;
+package structures;
 
 /**
  * Class Node will create the instance of a 

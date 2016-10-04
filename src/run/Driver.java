@@ -1,10 +1,14 @@
 /**
  * 
  */
-package listLab;
+package run;
 
 import java.util.List;
 import java.util.Random;
+
+import playlists.CircularLLPlaylist;
+import playlists.Song;
+import structures.CircularLL;
 
 /**
  * @author grahamw0
@@ -43,14 +47,24 @@ public class Driver {
     double elapsedTime = (stopTime - startTime) * 0.001;
     System.out.println(elapsedTime + " seconds");*/
     
-    ListArray<Integer> test = new ListArray<>(Integer.class);
+    /*CircularLL<Integer> test = new CircularLL<>();
     for(int i = 0; i < 20; i++) {
       test.add(i);
     }
-    test.shift(-2);
+    test.shift(2);
     for(Integer i : test.toArray()) {
       System.out.println(i);
+    }*/
+    
+    CircularLLPlaylist test = new CircularLLPlaylist("test");
+    test.addSong(new Song("one", "", 0f));
+    test.addSong(new Song("two", "", 0f));
+    test.addSong(new Song("three", "", 0f));
+    test.moveAllSongs(1);
+    for(Song s : test.getList()) {
+      System.out.println(s.getSongName());
     }
+    
     
   }
 

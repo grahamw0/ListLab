@@ -1,4 +1,4 @@
-package listLab;
+package structures;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -297,7 +297,7 @@ public class ListArray<T> implements MyList<T> {
       }
     }
     else {
-      return true;
+      return false;
     }
     this.array = newArray;
     return true;

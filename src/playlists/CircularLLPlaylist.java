@@ -1,10 +1,12 @@
 /**
  * 
  */
-package listLab;
+package playlists;
 
 import java.util.Arrays;
 import java.util.List;
+
+import structures.CircularLL;
 
 /**
  * Class CircularLLPlaylist is one of the 3 playlist classes
@@ -199,8 +201,7 @@ public class CircularLLPlaylist implements Playlist {
    */
   @Override
   public boolean moveAllSongs(int positions) {
-    // TODO Auto-generated method stub
-    return false;
+    return list.shift(positions);
   }
 
   /**
