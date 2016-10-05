@@ -4,10 +4,10 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * Class ListArray<T> will create an array-based list and is
- * one of the 3 generic list classes that implement MyList. 
- * This class is responsible for creating the array-based list
- * that class ArrayPlaylist will utilize.    
+ * Class ListArray<T> will create an array-based list and is one of the 3 generic list classes that
+ * implement MyList. This class is responsible for creating the array-based list that class
+ * ArrayPlaylist will utilize.
+ * 
  * @author Will Graham, Ryan Godfrey
  * @version 10/2/2016
  *
@@ -15,16 +15,15 @@ import java.util.Arrays;
 public class ListArray<T> implements MyList<T> {
 
   private int size; // The current size
-  private T[] array; // The array		
+  private T[] array; // The array
   @SuppressWarnings("rawtypes")
   private final Class c; // A class object
 
   /**
-   * Constructor for class ListArray.  When creating 
-   * an instance of this class it will set the size
-   * to 0, initialize the class object.  It will 
-   * also initialize a new array with a starting size
-   * of 10.  
+   * Constructor for class ListArray. When creating an instance of this class it will set the size
+   * to 0, initialize the class object. It will also initialize a new array with a starting size of
+   * 10.
+   * 
    * @param c
    */
   @SuppressWarnings("unchecked")
@@ -35,18 +34,16 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The add method inserts an element into a specified position
-   * in the list.  It throws an exception if the position value
-   * is less than 1 or greater than list size.
+   * The add method inserts an element into a specified position in the list. It throws an exception
+   * if the position value is less than 1 or greater than list size.
+   * 
    * @param index
-   * @param object. 
+   * @param object.
    * @return boolean
    */
   @Override
   public boolean add(int index, T o) {
-    if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException("Index is invalid");
-    }
+    checkBound(index);
     ensureArraySpace();
     for (int i = size - 1; i >= index; i--) { // Iterate through the list starting at the end.
       array[i + 1] = array[i]; // Shift to the right including the specified index.
@@ -57,37 +54,39 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The overloaded add() method is different by taking
-   * in only a list object as a parameter.  It appends an 
-   * element to the end of the list. 
+   * The overloaded add() method is different by taking in only a list object as a parameter. It
+   * appends an element to the end of the list.
+   * 
    * @param object
-   * @return boolean  
+   * @return boolean
    */
   @Override
   public boolean add(T o) {
-	// Check to see if there is space in the array.  If not create a copy and double the size.
-    ensureArraySpace(); 
-    this.array[size] = o; 
+    // Check to see if there is space in the array. If not create a copy and double the size.
+    ensureArraySpace();
+    this.array[size] = o;
     size++;
     return true;
   }
 
   /**
    * The clear() method will remove all of the elements from the list.
+   * 
    * @return boolean
    */
   @SuppressWarnings("unchecked")
   @Override
   public boolean clear() {
-	// Create a new instance of an array and set it to the current array. This will clear the current.  
-    this.array = (T[]) Array.newInstance(c, 10);  
+    // Create a new instance of an array and set it to the current array. This will clear the
+    // current.
+    this.array = (T[]) Array.newInstance(c, 10);
     this.size = 0; // Reset size to 0
     return true;
   }
 
   /**
-   * The contains() method will return true if the list contains
-   * the specified element.  
+   * The contains() method will return true if the list contains the specified element.
+   * 
    * @param object
    * @return boolean
    */
@@ -106,31 +105,30 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The get() method takes in an index and returns the element located
-   * in the specified position of this list.  This method also throws an
-   * exception if the position value is less than 1 or greater than the
-   * list size.  
+   * The get() method takes in an index and returns the element located in the specified position of
+   * this list. This method also throws an exception if the position value is less than 1 or greater
+   * than the list size.
+   * 
    * @param index The index in question
    * @return T Retrieve the element at the index
    */
   @Override
   public T get(int index) {
-    if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException("Index is invalid");
-    } else {
-      return (T) array[index]; // If there is no exception return the element at the specified index.
-    }
+    checkBound(index);
+    return (T) array[index]; // If there is no exception return the element at the specified index.
+
   }
 
   /**
-   * The indexOf() method will return an index in the list of the first occurrence
-   * of the specified element, or -1 if this list does not contain the element.
+   * The indexOf() method will return an index in the list of the first occurrence of the specified
+   * element, or -1 if this list does not contain the element.
+   * 
    * @param object
    * @return The index or -1 if it does not exist
    */
   @Override
   public int indexOf(T o) {
-    for (int i = 0; i < size; i++) { 
+    for (int i = 0; i < size; i++) {
       if (array[i] == o) { // If the element is in the list then return the index.
         return i;
       }
@@ -140,6 +138,7 @@ public class ListArray<T> implements MyList<T> {
 
   /**
    * The isEmpty() method will return true if the list contains no elements.
+   * 
    * @return boolean True if list is empty
    */
   @Override
@@ -148,27 +147,28 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The remove() method will remove the element at the specified position
-   * in this list.  It also throws and exception if the position value is less
-   * than 1 or greater than the list size.
-   * @param index 
+   * The remove() method will remove the element at the specified position in this list. It also
+   * throws and exception if the position value is less than 1 or greater than the list size.
+   * 
+   * @param index
    * @return the deleted data
    */
   @Override
   public T remove(int index) {
-    T returnObject = array[index]; // Get the element at the index and set it to a variable. 
+    checkBound(index);
+    T returnObject = array[index]; // Get the element at the index and set it to a variable.
     for (int i = index; i < size - 1; i++) { // Starting at the index position
       array[i] = array[i + 1]; // Shift all elements after the index left.
     }
-    array[size - 1] = null; // Clear the last element.  
-    size--; 
-    return returnObject; // return the deleted data.  
+    array[size - 1] = null; // Clear the last element.
+    size--;
+    return returnObject; // return the deleted data.
   }
 
   /**
-   * The overloaded remove() method is different in that it
-   * takes in an object as a parameter instead of an index. It removes
-   * the first occurrence of the specified element from the list.
+   * The overloaded remove() method is different in that it takes in an object as a parameter
+   * instead of an index. It removes the first occurrence of the specified element from the list.
+   * 
    * @param object
    * @return The deleted data
    */
@@ -181,9 +181,10 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The set method() will replace the element in specified position 
-   * in the list with the provided element.  It also throws an exception
-   * if the position value is less than 1 or greater than the list size.
+   * The set method() will replace the element in specified position in the list with the provided
+   * element. It also throws an exception if the position value is less than 1 or greater than the
+   * list size.
+   * 
    * @param index
    * @param Object element
    * @return boolean
@@ -191,16 +192,14 @@ public class ListArray<T> implements MyList<T> {
   @SuppressWarnings("unchecked")
   @Override
   public boolean set(int index, Object element) {
-    if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException("Index is invalid");
-    } else {
-      array[index] = (T) element;  // Set the element at the specified index. 
-    }
+    checkBound(index);
+    array[index] = (T) element; // Set the element at the specified index.
     return true;
   }
 
   /**
    * The size() method will return the number of elements in the list
+   * 
    * @return the size of the list
    */
   @Override
@@ -209,10 +208,10 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The subList() method will return a new list that contains the portion of 
-   * the original list between the specified fromIndex, inclusive, and toIndex, exclusive.
-   * It also throws an exception if the either the index values is less than 1 or greater
-   * than the list size.
+   * The subList() method will return a new list that contains the portion of the original list
+   * between the specified fromIndex, inclusive, and toIndex, exclusive. It also throws an exception
+   * if the either the index values is less than 1 or greater than the list size.
+   * 
    * @param fromindex
    * @param toindex
    * @return the new list
@@ -220,56 +219,56 @@ public class ListArray<T> implements MyList<T> {
   @SuppressWarnings({"unchecked", "rawtypes"})
   @Override
   public MyList<T> subList(int fromIndex, int toIndex) {
-    if (fromIndex < 0 || fromIndex > size || toIndex < 0 || toIndex > size) {
-      throw new IndexOutOfBoundsException("Index is invalid");
-    }
+    checkBound(fromIndex);
+    checkBound(toIndex);
 
     ListArray newList = new ListArray<>(c); // Create a new array to copy to.
-    newList.setArray(Arrays.copyOfRange(array, fromIndex, toIndex)); // Grab the elements within the range.
+    newList.setArray(Arrays.copyOfRange(array, fromIndex, toIndex)); // Grab the elements within the
+                                                                     // range.
     newList.size = toIndex - fromIndex; // Update the list size.
     return newList; // Return the new sub list
   }
 
   /**
-   * The toArray() method will return an array containing all of the
-   * elements in the list in proper sequence. 
+   * The toArray() method will return an array containing all of the elements in the list in proper
+   * sequence.
+   * 
    * @return the array
    */
   @SuppressWarnings("unchecked")
   @Override
   public T[] toArray() {
-    T[] newArray = (T[]) Array.newInstance(this.c, size); // Create a new array to copy to. 
+    T[] newArray = (T[]) Array.newInstance(this.c, size); // Create a new array to copy to.
     for (int i = 0; i < size; i++) {
-      newArray[i] = array[i]; // Shift the elements from the array to the new one.  
-    }                 
+      newArray[i] = array[i]; // Shift the elements from the array to the new one.
+    }
     return newArray; // Return the new array.
   }
 
   /**
-   * The swap() method will swap elements of the List located in the
-   * positions 1 and 2.  It also throws an exception if either position values
-   * is less than 1 or greater than the list size.
+   * The swap() method will swap elements of the List located in the positions 1 and 2. It also
+   * throws an exception if either position values is less than 1 or greater than the list size.
+   * 
    * @param position1
    * @param position2
    * @return boolean
    */
   @Override
   public boolean swap(int position1, int position2) {
-    if (position1 < 0 || position1 > size || position2 < 0 || position2 > size) {
-      throw new IndexOutOfBoundsException("Index is invalid");
-    } else {
-      T temp = array[position1]; // Load position1 data into a temporary
-      array[position1] = array[position2]; // Load position2 data into postition1
-      array[position2] = temp; // Load the temp into position2
-    }
+    checkBound(position1);
+    checkBound(position2);
+    T temp = array[position1]; // Load position1 data into a temporary
+    array[position1] = array[position2]; // Load position2 data into postition1
+    array[position2] = temp; // Load the temp into position2
+
     return true;
   }
 
   /**
-   * The shift() method will shift all elements in the List by a specified number
-   * of location.  If the value of positions is positive then the elements are
-   * shifted from left to right.  If the value of positions is negative then the 
-   * elements are shifted from right to left.  
+   * The shift() method will shift all elements in the List by a specified number of location. If
+   * the value of positions is positive then the elements are shifted from left to right. If the
+   * value of positions is negative then the elements are shifted from right to left.
+   * 
    * @param positions
    * @return boolean
    */
@@ -280,18 +279,17 @@ public class ListArray<T> implements MyList<T> {
     T[] newArray = (T[]) new Object[size];
     if (positions > 0) {
       int j = 0;
-      for (int i = positions; i < size ; i++) {
+      for (int i = positions; i < size; i++) {
         newArray[j] = array[i];
         j++;
       }
-      for (int i = 0; i < positions ; i++) {
+      for (int i = 0; i < positions; i++) {
         newArray[j] = array[i];
         j++;
       }
-    }
-    else if (positions < 0) {
+    } else if (positions < 0) {
       int j = 0;
-      for (int i = size + positions ; i < size; i++) {
+      for (int i = size + positions; i < size; i++) {
         newArray[j] = array[i];
         j++;
       }
@@ -299,8 +297,7 @@ public class ListArray<T> implements MyList<T> {
         newArray[j] = array[i];
         j++;
       }
-    }
-    else {
+    } else {
       return false;
     }
     this.array = newArray;
@@ -309,8 +306,8 @@ public class ListArray<T> implements MyList<T> {
 
 
   /**
-   * The setArray() method will take in an array
-   * object and set it to the current array. 
+   * The setArray() method will take in an array object and set it to the current array.
+   * 
    * @param array
    */
   public void setArray(T[] array) {
@@ -318,14 +315,20 @@ public class ListArray<T> implements MyList<T> {
   }
 
   /**
-   * The ensureArraySpace() method will check to see
-   * if the current space in the array is sufficient for 
-   * the upcoming actions.  If it is not then it creates
-   * more space by copying to a new array and doubling the size.  v
+   * The ensureArraySpace() method will check to see if the current space in the array is sufficient
+   * for the upcoming actions. If it is not then it creates more space by copying to a new array and
+   * doubling the size. v
    */
   private void ensureArraySpace() {
     if ((size + 1) > array.length) // If the size of the list is 1 bigger than the array itself
-      this.array = Arrays.copyOf(array, (array.length * 2)); // Create a copy and double the size of the old array.
+      this.array = Arrays.copyOf(array, (array.length * 2)); // Create a copy and double the size of
+                                                             // the old array.
+  }
+
+  private void checkBound(int index) {
+    if (index < 0 || index > size - 1) {
+      throw new IndexOutOfBoundsException("Index is invalid");
+    }
   }
 
 }
