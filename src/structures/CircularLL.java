@@ -378,30 +378,37 @@ public class CircularLL<T> implements MyList<T> {
     return true; // return true if the swap was a success
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see listLab.MyList#shift(int)
+  /**
+   * The shift() method will shift all elements in the List by a specified
+   * number of locations.  If the value of positions is positive then the elements are 
+   * shifted from left to right.  If the value of positions is negative then the elements are
+   * shifted from right to left.  
    */
   @Override
   public boolean shift(int positions) {
-    if(size == 0) {
+    if(size == 0) { // If the list is empty then return false.
       return false;
     }
-    if(positions > 0) {
-      for(int i = 0; i < size - positions; i++) {
+    if(positions > 0) { // If # of positions is positive
+      for(int i = 0; i < size - positions; i++) { // Shift right
         head = head.getNext();
         tail = tail.getNext();
       }
-    } else if (positions < 0) {
-      for(int i = 0; i < Math.abs(positions); i++) {
+    } else if (positions < 0) { // If # of positions is negative
+      for(int i = 0; i < Math.abs(positions); i++) { // Shift left
         head = head.getNext();
         tail = tail.getNext();
       }
     }
     return true;
   }
-
+  
+  /**
+   * The checkBoundsHead will take in an index and check to 
+   * see if the index is valid.  If it is not valid then it
+   * will throw an outOfBoundsException
+   * @param index
+   */
   private void checkBoundsHead(int index) {
     if (index < 0 || index > size - 1) {
       throw new IndexOutOfBoundsException("Index is invalid");

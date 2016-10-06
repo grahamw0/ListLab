@@ -389,26 +389,29 @@ public class SingularLL<T> implements MyList<T> {
     return true; // return true if the swap was a success
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * The shift() method will shift all elements in the List by a specified number of location. If
+   * the value of positions is positive then the elements are shifted from left to right. If the
+   * value of positions is negative then the elements are shifted from right to left.
    * 
-   * @see listLab.MyList#shift(int)
+   * @param positions
+   * @return boolean
    */
   @Override
   public boolean shift(int positions) {
-    if (size == 0) {
+    if (size == 0) { // IF the list is empty return false.
       return false;
     }
-    if (positions > 0) {
-      for (int i = 0; i < size - positions; i++) {
+    if (positions > 0) { // If positions are positive
+      for (int i = 0; i < size - positions; i++) { // Shift right
         Node temp = head;
         head = head.getNext();
         temp.setNext(null);
         tail.setNext(temp);
         tail = temp;
       }
-    } else if (positions < 0) {
-      for (int i = 0; i < Math.abs(positions); i++) {
+    } else if (positions < 0) { // If postions are negative 
+      for (int i = 0; i < Math.abs(positions); i++) { // Shift left
         Node temp = head;
         head = head.getNext();
         temp.setNext(null);
@@ -416,10 +419,16 @@ public class SingularLL<T> implements MyList<T> {
         tail = temp;
       }
     }
-
     return true;
   }
 
+  /**
+   * The checkBoundsHead will take in an index and check to 
+   * see if the index is valid.  If it is not valid then it
+   * will throw an outOfBoundsException.  If the head does
+   * not exist then throw a NullPointerException.
+   * @param index
+   */
   private void checkBoundsHead(int index) {
     if (index < 0 || index > size - 1) {
       throw new IndexOutOfBoundsException("Index is invalid");

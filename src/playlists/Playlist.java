@@ -3,8 +3,10 @@ package playlists;
 import java.util.List;
 
 /**
- * @author grahamw0
- *
+ * This is the interface Playlist.  It is the interface
+ * for all 3 Playlist classes.  
+ * @author Will Graham, Ryan Godfrey
+ * @version 10/5/2016
  */
 public interface Playlist {
   public String playlistName();

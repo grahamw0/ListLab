@@ -275,32 +275,32 @@ public class ListArray<T> implements MyList<T> {
   @SuppressWarnings("unchecked")
   @Override
   public boolean shift(int positions) {
-    positions *= -1;
-    T[] newArray = (T[]) new Object[size];
-    if (positions > 0) {
+    positions *= -1; // Fixes the opposite result
+    T[] newArray = (T[]) new Object[size]; 
+    if (positions > 0) { // If positions is positive
       int j = 0;
-      for (int i = positions; i < size; i++) {
-        newArray[j] = array[i];
+      for (int i = positions; i < size; i++) { // Start iterating at positions
+        newArray[j] = array[i]; // Move what is in i to j
         j++;
       }
-      for (int i = 0; i < positions; i++) {
-        newArray[j] = array[i];
+      for (int i = 0; i < positions; i++) { // Start iterating again for what is remaining
+        newArray[j] = array[i]; // Move what is left from i to j
         j++;
       }
-    } else if (positions < 0) {
+    } else if (positions < 0) { // If positions is negative
       int j = 0;
-      for (int i = size + positions; i < size; i++) {
-        newArray[j] = array[i];
+      for (int i = size + positions; i < size; i++) { // Start iterating at the proper position
+        newArray[j] = array[i]; // Move what is in i to j
         j++;
       }
-      for (int i = 0; i < size + positions; i++) {
-        newArray[j] = array[i];
+      for (int i = 0; i < size + positions; i++) { // Start iterating again for what is remaining
+        newArray[j] = array[i]; // Move what is remaining from i to j
         j++;
       }
     } else {
       return false;
     }
-    this.array = newArray;
+    this.array = newArray; 
     return true;
   }
 
@@ -324,6 +324,13 @@ public class ListArray<T> implements MyList<T> {
       this.array = Arrays.copyOf(array, (array.length * 2)); // Create a copy and double the size of
                                                              // the old array.
   }
+  
+  /**
+   * The checkBound will take in an index and check to 
+   * see if the index is valid.  If it is not valid then it
+   * will throw an outOfBoundsException
+   * @param index
+   */
 
   private void checkBound(int index) {
     if (index < 0 || index > size - 1) {

@@ -1,8 +1,10 @@
 package structures;
 
 /**
+ * This is the interface Mylist.  It is the interface
+ * for all 3 List classes.
  * @author Ryan Godfrey, Will Graham
- *
+ * @version 10/5/2016
  */
 public interface MyList<T> {
   

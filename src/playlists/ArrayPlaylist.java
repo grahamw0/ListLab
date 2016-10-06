@@ -14,7 +14,7 @@ import structures.ListArray;
  * pertain to the actual array-based playlist itself. 
  * 
  * @author Will Graham, Ryan Godfrey
- *
+ * @version 10/5/2016
  */
 public class ArrayPlaylist implements Playlist {
   private String name;
@@ -193,8 +193,13 @@ public class ArrayPlaylist implements Playlist {
     return true;
   }
 
-  /* (non-Javadoc)
-   * @see listLab.Playlist#moveAllSongs(int)
+  /**
+   * The moveAllSongs() method will move all the songs a given number of 
+   * positions in the list.  If the value of positions is positive then
+   * the elements are shifted from left to right.  If the value of positions is negative 
+   * then the elements are shifted from right to left.  
+   * @param postitions
+   * @return boolean  
    */
   @Override
   public boolean moveAllSongs(int positions) {
