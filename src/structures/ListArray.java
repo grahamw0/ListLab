@@ -45,11 +45,9 @@ public class ListArray<T> implements MyList<T> {
   public boolean add(int index, T o) {
     checkBound(index);
     ensureArraySpace();
-    for (int i = size - 1; i >= index; i--) { // Iterate through the list starting at the end.
-      array[i + 1] = array[i]; // Shift to the right including the specified index.
-    }
-    array[index] = o; // Add the object at the specified index in the array
+    this.array[size] = o;
     size++;
+    swap(index, size-1);
     return true;
   }
 
